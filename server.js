@@ -3,9 +3,13 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
 const cors = require("cors");
+const connectDB = require("./config/DB");
 
 //config .env file
 dotenv.config();
+
+//mongo db connection :- mongodb config must be below dotenv config
+connectDB();
 
 //rest object
 const app = expess();
