@@ -20,7 +20,9 @@ app.use(cors());
 app.use(morgan("dev")); //you can see you req  and res behaviour
 
 //router
+//testing route
 app.use("/api/v1/test", require("./routes/testRout"));
+app.use("/api/v1/auth", require("./routes/authRoutes"));
 
 //port
 const PORT = process.env.PORT || 8080;
