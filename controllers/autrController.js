@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 //register
 const registerController = async (req, res) => {
@@ -37,4 +38,50 @@ const registerController = async (req, res) => {
   }
 };
 
-module.exports = { registerController };
+////login call back || POST
+const loginController = async (req, res) => {
+  try {
+    const user = await userModel.findOne({ email: req.body.email });
+
+    //user validation
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "invalid credentials",
+      });
+    }
+
+    //compare password
+    const comparePassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    ); //check again
+
+    if (!comparePassword) {
+      return res.status(500).send({
+        success: false,
+        message: "invalid credentials",
+      });
+    }
+
+    //generate token
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
+      expiresIn: "1d",
+    }); //jwt.sign(payload, secretOrPrivateKey, [options, callback])
+    return res.status(200).send({
+      success: true,
+      message: "User login successfully",
+      token,
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error from login api",
+      error,
+    });
+  }
+};
+
+module.exports = { registerController, loginController };
