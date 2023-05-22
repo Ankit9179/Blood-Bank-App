@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
           message: "Auth faild",
         });
       } else {
-        req.body.userId = dcode.id;
+        req.body.userId = dcode.userId;
         next();
       }
     });
