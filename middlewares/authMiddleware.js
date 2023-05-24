@@ -14,6 +14,7 @@ module.exports = async (req, res, next) => {
       } else {
         req.body.userId = dcode.userId;
         next();
+        console.log("token matched");
       }
     });
   } catch (error) {
