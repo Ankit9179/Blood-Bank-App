@@ -32,7 +32,7 @@ const registerController = async (req, res) => {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "error from register api",
+      message: "Error from register api",
       error,
     });
   }
@@ -48,6 +48,12 @@ const loginController = async (req, res) => {
       return res.status(404).send({
         success: false,
         message: "invalid credentials",
+      });
+    }
+    if (user.role !== req.body.role) {
+      return res.status(500).send({
+        success: false,
+        message: "role dosent match",
       });
     }
 

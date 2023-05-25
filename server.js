@@ -23,6 +23,7 @@ app.use(morgan("dev")); //you can see you req  and res behaviour
 //testing route
 app.use("/api/v1/test", require("./routes/testRout"));
 app.use("/api/v1/auth", require("./routes/authRoutes"));
+app.use("/api/v1/inventory", require("./routes/inventoryRoutes"));
 
 //port
 const PORT = process.env.PORT || 8080;
