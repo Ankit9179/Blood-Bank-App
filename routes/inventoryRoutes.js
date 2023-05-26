@@ -1,5 +1,8 @@
 const express = require("express");
-const { inventoryController } = require("../controllers/inventoryController");
+const {
+  inventoryController,
+  getInvetoryController,
+} = require("../controllers/inventoryController");
 
 const router = express.Router();
 
@@ -7,5 +10,9 @@ const router = express.Router();
 // create inventory || POST
 
 router.post("/create-inventory", inventoryController);
+
+//get inventory || GET
+
+router.get("/get-inventory", getInvetoryController);
 
 module.exports = router;

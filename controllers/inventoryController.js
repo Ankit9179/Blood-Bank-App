@@ -1,7 +1,7 @@
 const userModel = require("../models/userModel");
 const inventoryModle = require("../models/inventoryModle");
 
-//create inventory
+//create inventory callback
 const inventoryController = async (req, res) => {
   try {
     //validation
@@ -38,4 +38,27 @@ const inventoryController = async (req, res) => {
   }
 };
 
-module.exports = { inventoryController };
+//get inventory callback
+
+const getInvetoryController = async (req, res) => {
+  try {
+    const inventory = await inventoryModle.find({
+      organisation: req.body.userId,
+    });
+
+    return res.status(200).send({
+      success: true,
+      message: "get all record successfully",
+      inventory,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error in get all inventorys",
+      error,
+    });
+  }
+};
+
+module.exports = { inventoryController, getInvetoryController };
