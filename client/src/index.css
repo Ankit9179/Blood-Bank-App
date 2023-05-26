@@ -3,3 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+
+/* login form*/
+.login-pic-div img{
+  width: 100%;
+  height: 100%;
+}
+
+
+.form-comtainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+ /* login form*/
